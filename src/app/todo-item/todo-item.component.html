@@ -1,0 +1,21 @@
+
+<div class="todo-item" 
+  [appTodoStatus]="todoItem" 
+  [status]="todoItem.status" 
+  [completed]="todoItem.completed">
+  <div class="todo-actions">
+    <input type="checkbox" [(ngModel)]="todoItem.completed" (change)="onStatusChange()">
+  </div>
+  <div class="todo-content">
+    <span [class.completed]="todoItem.completed">{{ todoItem.ItemName }}</span>
+  </div>
+  <div class="todo-date">
+    <span>{{ todoItem.dueDate | date }}</span>
+  </div>
+  
+ 
+  <div class="todo-delete">
+    <button (click)="onDelete()">Delete</button>
+  </div>
+
+</div>

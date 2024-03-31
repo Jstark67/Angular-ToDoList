@@ -1,0 +1,102 @@
+<div class="header">
+  <a  class="logo">User Records</a>
+</div>
+
+
+<form #userForm="ngForm" (ngSubmit)="addUser()" >
+  <div class="row m-1 p-3">
+    <div class="col col-11 mx-auto">
+        <div class="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center">
+            <div class="col">
+                <input class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded" type="text" 
+                      placeholder="Add new users.."
+                      name="userName" [(ngModel)]="newUsername" required>
+                      
+               
+            </div>
+            
+           
+            
+            <div class="col-auto px-0 mx-0 mr-2">
+                
+                <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">Add User</button>
+            </div>
+        </div>
+    </div>
+  </div>
+</form>
+
+<div class="container">
+  <!-- <div class="user-input">
+    <form  #userForm="ngForm" (ngSubmit)="addUser()">
+      <input
+        name="username"
+        #userName="ngModel"
+        [(ngModel)]="newUsername"
+        type="text"
+        placeholder="Enter a new username"
+        required
+      >
+      <button 
+        type="submit" 
+        [disabled]="userForm.invalid">
+        Add the User
+      </button>
+    </form>
+  </div>
+     -->
+  
+  
+  
+  <div class="user-list">
+    <ul>
+      <li class="list-group-item" *ngFor="let user of users">
+        <div class="user">
+          <div *ngIf="editUsername===user.username; else displayUserTemplate">
+            <input [(ngModel)]="editedUsername">
+            <button (click)="updateUser(editUsername, editedUsername)">Save</button>
+            <button (click)="editUsername=''">Cancel</button>
+          </div>
+          <ng-template #displayUserTemplate>
+            <div class="username-container">
+              <span class="username-span">{{ user.username }}</span>
+            </div>
+            <div class="edit">
+              <button  (click)="editUsername = user.username">Edit</button>
+            </div>
+            <div class="delete">
+              <button  (click)="deleteUser(user.username)">Delete</button>
+            </div>
+            <div class = "goto-Todo">
+              <button (click)="gotoTodoList(user.username)">Todos</button>
+            </div>
+          </ng-template>
+        </div>
+        
+          
+          
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- <div class="todo-item" 
+  [appTodoStatus]="todoItem" 
+  [status]="todoItem.status" 
+  [completed]="todoItem.completed">
+  <div class="todo-content">
+    <span [class.completed]="todoItem.completed">{{ todoItem.ItemName }}</span>
+  </div>
+  <div class="todo-date">
+    <span>{{ todoItem.dueDate | date }}</span>
+  </div>
+  
+  <div class="todo-actions">
+    <input type="checkbox" [(ngModel)]="todoItem.completed" (change)="onStatusChange()">
+  </div>
+  <div class="todo-delete">
+    <button (click)="onDelete()">Delete</button>
+  </div>
+
+</div> -->

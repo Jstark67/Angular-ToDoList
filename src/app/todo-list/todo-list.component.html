@@ -1,0 +1,52 @@
+<div class="header">
+  <a  class="logo" >{{ username | uppercase}}'s Todo Items</a>
+  <div class="header-right">
+    <a class="active" href="#home">Home</a>
+  </div>
+  <div class="toggle">
+    <button class="toggle-progress" (click)="toggleInProgressFilter()">
+      {{ showInProgressOnly ? 'Show All' : 'In Progress Only' }}
+    </button>
+  </div>
+  
+</div>
+
+<form #todoForm="ngForm" (ngSubmit)="addTodo()" >
+  <div class="row m-1 p-3">
+    <div class="col col-11 mx-auto">
+        <div class="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center">
+            <div class="col">
+                <input class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded" type="text" 
+                      placeholder="Add new todos.."
+                      name="todoName" [(ngModel)]="newTodoName" required>
+                      
+            </div>
+            <div class="col-auto m-0 px-2 d-flex align-items-center">
+              <input type="date" name="dueDate" [(ngModel)]="newDueDate" required #dueDate="ngModel">
+          </div>
+           
+            
+            <div class="col-auto px-0 mx-0 mr-2">
+                
+                <button type="submit" class="btn btn-primary" [disabled]="todoForm.invalid">Add Todo</button>
+            </div>
+        </div>
+    </div>
+  </div>
+</form>
+
+
+<div class="todo-list">
+  <app-todo-item *ngFor="let item of filteredTodos" [todoItem]="item" 
+                 (delete)="deleteTodo($event)" 
+                 (update)="updateTodo($event)">
+  </app-todo-item>
+</div>
+
+<!-- <div class="todo-list"> 
+  <app-todo-item *ngFor="let item of todos" [todoItem]="item"
+                 (delete)="deleteTodo($event)"
+                 (update)="updateTodo($event)"
+                 >
+  </app-todo-item>
+</div> -->
