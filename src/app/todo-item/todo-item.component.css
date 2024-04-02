@@ -4,24 +4,24 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 10px auto; /* Keeps the item centered */
-  padding: 10px; /* Increase padding for a larger look */
+  margin: 10px auto;
+  padding: 10px; 
   border: 1px solid #ddd;
   border-radius: 4px;
-  width: 400px; /* Adjust as needed */
-  height: 120px; /* Fixed height for consistency */
+  width: 400px; 
+  height: 120px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
   
 }
 
 .todo-content {
-  flex: 1; /* Allows the content to grow and fill available space */
+  flex: 1; 
   padding-left: 5px
   
 }
 
 .todo-date, .todo-actions {
-  flex-basis: auto; /* Allows these elements to grow or shrink */
+  flex-basis: auto; 
 }
 
 .todo-item span.date {

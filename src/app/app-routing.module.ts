@@ -4,8 +4,11 @@ import { UserListComponent } from './user-list/user-list.component';
 import { TodoListComponent } from './todo-list/todo-list.component';
 
 const routes: Routes = [
+  // Root route
   { path: 'users', component: UserListComponent },
+  // Todo List Route
   { path: 'users/:username/todos', component: TodoListComponent },
+  // Return to users route
   { path: '', redirectTo: '/users', pathMatch: 'full' }
 ];
 
