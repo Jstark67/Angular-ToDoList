@@ -51,10 +51,6 @@ export class TodoService {
       return
     }
     
-    // Mark as due-soon
-    if (dateDiff <= 5) {
-      newTodo.status = "due-soon"
-    }
 
     // Avoid duplicate item; duplication evaluated by item name, owner and
     // due date
@@ -129,41 +125,7 @@ export class TodoService {
     });
   }
   
-  // updateTodoStatuses is a private helper function that updates the status of 
-  // each todo item in the stream based on the current time
-  private updateTodoStatuses(): void {
-    const todos = this.todoListSubject.getValue();
-    const nowDate = new Date();
-    nowDate.setHours(0,0,0,0)
-    
-    // For every todo item, update its status if conditions are met
-    todos.forEach(todo => {
-      const dueDate = new Date(todo.dueDate);
-      const dateDiff = (todo.dueDate.getTime() - nowDate.getTime()) / (1000 * 60 * 60 * 24)
-      if (dateDiff < 0) {
-        todo.status = 'overdue';
-      } else if (dateDiff <= 5) {
-        todo.status = 'due-soon';
-      } else {
-        todo.status = 'normal';
-      }
-    });
-    
-    // Updates the current stream
-    this.todoListSubject.next(todos); 
-  }
   
-  // startDailyCheck is a wrapper function that calls updateTodoStatuses upon initiation
-  // of the component to perform a daily status check
-  startDailyCheck(): void {
-    // Immediately performs static check
-    this.updateTodoStatuses();
-    
-    // Schedule a check per 24 hours
-    setInterval(() => {
-      this.updateTodoStatuses();
-    }, 86400000); // 86400000 ms = 24 hours
-  }
 
   
 }

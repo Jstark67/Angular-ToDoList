@@ -10,7 +10,6 @@ export class AppComponent implements OnInit {
   constructor(private todoService: TodoService) {}
 
   ngOnInit(): void {
-    this.todoService.startDailyCheck()
   }
   title = 'to-do-list';
 }

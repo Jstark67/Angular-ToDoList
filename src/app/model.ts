@@ -11,7 +11,7 @@ export interface TodoItem {
   owner: string
   completed: boolean
   dueDate: Date;
-  status: 'due-soon' | 'overdue' | 'normal';
+  // status: 'due-soon' | 'overdue' | 'normal';
 }
 
 // A random ID generator based on the creat time

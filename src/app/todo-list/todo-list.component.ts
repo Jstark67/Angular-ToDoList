@@ -65,7 +65,7 @@ export class TodoListComponent implements OnInit, OnDestroy{
       owner: this.username,
       completed: false,
       dueDate: this.newDueDate,
-      status: 'normal'
+      
     };
 
     this.TodoService.addTodos(newTodo);

@@ -1,4 +1,4 @@
-import { Directive, ElementRef, Input, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
+import { Directive, ElementRef, Input, OnInit, OnChanges, Renderer2, SimpleChanges } from '@angular/core';
 import { TodoItem } from './model';
 @Directive({
   selector: '[appTodoStatus]'
@@ -6,25 +6,36 @@ import { TodoItem } from './model';
 
 // An attribute directive used to render different colors for todo items based 
 // on their completion and due date status
-export class TodoStatusDirective implements OnChanges {
+export class TodoStatusDirective implements OnInit, OnChanges {
   @Input() appTodoStatus!: TodoItem;
-  @Input() status!: 'due-soon' | 'overdue' | 'normal';
+  @Input() dueDate!: Date;
   @Input() completed!: boolean;
 
   // Initializes required builtin services
   constructor(private el: ElementRef, private renderer: Renderer2) { }
 
-  // Sets the background color of the html element when conditions are met
-  ngOnChanges(changes: SimpleChanges): void {
+  handleRender(): void {
+    const curr = new Date()
+    const ddl = new Date(this.dueDate)
+    const diffTime = ddl.getTime() - curr.getTime()
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
     if (this.completed) {
       this.renderer.setStyle(this.el.nativeElement, "backgroundColor", "lightgreen")
-    } else if (this.status == 'normal') {
+    } else if (diffDays >= 5) {
       this.renderer.setStyle(this.el.nativeElement, "backgroundColor", "white")
-    } else if (this.status == 'due-soon') {
+    } else if (diffDays >= 0) {
       this.renderer.setStyle(this.el.nativeElement, "backgroundColor", "orange")
     } else {
       this.renderer.setStyle(this.el.nativeElement, "backgroundColor", "red")
     }
+  }
+  // Sets the background color of the html element when conditions are met
+  ngOnInit(): void {
+   this.handleRender()
+  }
+
+  ngOnChanges(): void {
+    this.handleRender()
   }
 }
 

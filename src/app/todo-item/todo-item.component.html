@@ -1,7 +1,7 @@
 
 <div class="todo-item" 
   [appTodoStatus]="todoItem" 
-  [status]="todoItem.status" 
+  [dueDate]="todoItem.dueDate" 
   [completed]="todoItem.completed">
   <div class="todo-actions">
     <input type="checkbox" [(ngModel)]="todoItem.completed" (change)="onStatusChange()">
