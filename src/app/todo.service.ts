@@ -54,11 +54,12 @@ export class TodoService {
 
     // Avoid duplicate item; duplication evaluated by item name, owner and
     // due date
+    
     const todos = this.todoListSubject.getValue()
     const isDupItem = todos.some(item =>
       newTodo.ItemName === item.ItemName &&
       newTodo.owner === item.owner &&
-      newTodo.dueDate === item.dueDate)
+      new Date(item.dueDate).getDate() === new Date(item.dueDate).getDate())
     
     // Update the current stream
     if (!isDupItem) {
@@ -67,6 +68,7 @@ export class TodoService {
       this.todoListSubject.next([...todos])
       this.saveTodos(todos, this.currUser)
     } else {
+      console.log("no add")
       alert(`Todo Item "${newTodo.ItemName}" is already assigned and not finished.`);
     }
     
@@ -80,7 +82,8 @@ export class TodoService {
     // Set for consistent measure
     nowDate.setHours(0,0,0,0)
     const newDate = new Date(dueDate)
-    const dateDiff = (newDate.getTime() - nowDate.getTime()) / (1000 * 60 * 60 * 24)
+    const diffTime = newDate.getTime() - nowDate.getTime()
+    const dateDiff = Math.ceil(diffTime / (1000 * 60 * 60 * 24))
     return dateDiff
   }
 
